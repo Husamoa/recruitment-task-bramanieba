@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import CitiesList from './CitiesList';
 
 export default class Autocomplete extends Component {
   static defaultProperty = {
@@ -12,7 +13,7 @@ export default class Autocomplete extends Component {
       filteredSuggestions: [],
       showSuggestions: false,
       userInput: '',
-      activeClass: 'active',
+      cities: [],
     };
   }
 
@@ -76,13 +77,48 @@ export default class Autocomplete extends Component {
       case 'Spain':
       case 'France':
         console.log('submit');
+        this.searchPollutionCities(e);
         break;
       default:
         console.log('sorry, this country is unavailable');
     }
   }
 
+  searchPollutionCities = (e) => {
+    e.preventDefault();
+    const { userInput } = this.state;
+    const replaceCountryString = (country) => {
+      switch (country) {
+        case 'Poland':
+          return 'PL';
+        case 'Germany':
+          return 'DE';
+        case 'Spain':
+          return 'ES';
+        case 'France':
+          return 'FR';
+        default:
+          return null;
+      }
+    };
+
+    fetch(`https://api.openaq.org/v1/cities?country=${replaceCountryString(userInput)}&sort=desc&limit=10`, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(response => response.json()).then((data) => {
+      console.log(data.results);
+      this.setState({
+        cities: [...data.results],
+      });
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
   render() {
+    const { cities } = this.state;
     const {
       onChange,
       onClick,
@@ -127,21 +163,34 @@ export default class Autocomplete extends Component {
 
     return (
       <Fragment>
-        <form className="form-inline" onSubmit={onSubmit}>
-          <div className="form-group mb-2">
-            <input
-              className="form-control"
-              type="text"
-              tabIndex="0"
-              placeholder="Search country"
-              onChange={onChange}
-              onKeyDown={onKeyDown}
-              value={userInput || ''}
-            />
-            {suggestionsListComponent}
+        <div className="row">
+          <div className="container-fluid bg-light d-flex justify-content-center p-3">
+            <div className="container d-flex justify-content-center inputSection">
+              <div className="inputSection">
+                <form className="form-inline" onSubmit={onSubmit}>
+                  <div className="form-group mb-2">
+                    <input
+                      className="form-control"
+                      type="text"
+                      tabIndex="0"
+                      placeholder="Search country"
+                      onChange={onChange}
+                      onKeyDown={onKeyDown}
+                      value={userInput || ''}
+                    />
+                    {suggestionsListComponent}
+                  </div>
+                  <button type="submit" className="btn btn-outline-secondary mb-2">Search</button>
+                </form>
+              </div>
+            </div>
           </div>
-          <button type="submit" className="btn btn-outline-secondary mb-2">Search</button>
-        </form>
+        </div>
+        <div className="row">
+          <div className="container d-flex justify-content-center">
+            <CitiesList cities={cities} />
+          </div>
+        </div>
       </Fragment>
     );
   }

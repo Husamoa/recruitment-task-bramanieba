@@ -1,21 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import InputField from './InputField';
 
-export default class App extends Component {
-  state={ search: '' }
+const App = () => (
+  <InputField />
+);
 
-  handleClick = (e) => {
-    e.preventDefault();
-    this.setState({
-      search: e.target.value,
-    });
-  }
-
-  render() {
-    const { search } = this.state;
-    return (
-      <InputField />
-    );
-  }
-}
+export default App;
