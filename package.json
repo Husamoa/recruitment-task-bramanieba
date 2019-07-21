@@ -1,0 +1,55 @@
+{
+  "name": "recruitment-task-bramanieba",
+  "version": "1.0.0",
+  "description": "In order to get the highest possible score, all of the following requirements should be completed. Candidates are allowed to use any technology which they consider most suitable. Try to use the best UX/UI practices, feel free in design conception. Good luck!",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack-dev-server --env.dev --inline --hot --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Husamoa/recruitment-task-bramanieba.git"
+  },
+  "author": "Paweł Białek",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Husamoa/recruitment-task-bramanieba/issues"
+  },
+  "devDependencies": {
+    "autoprefixer": "^8.4.1",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^7.1.4",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^2.1.1",
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "json-server": "^0.14.0",
+    "mini-css-extract-plugin": "^0.4.1",
+    "node-sass": "^4.9.0",
+    "postcss-loader": "^2.1.5",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.8.1",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "dependencies": {
+    "npm": "^6.4.0",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-router-dom": "^4.3.1",
+    "whatwg-fetch": "^3.0.0"
+  },
+  "homepage": "https://github.com/Husamoa/recruitment-task-bramanieba#readme"
+}
