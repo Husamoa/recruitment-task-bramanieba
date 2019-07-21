@@ -1,9 +1,8 @@
-import React, { Component, Fragment } from 'react';
-
-import InputField from './InputField';
+import React from 'react';
+import Cities from './Cities';
 
 const App = () => (
-  <InputField />
+  <Cities suggestions={['Poland', 'Germany', 'Spain', 'France']} />
 );
 
 export default App;
