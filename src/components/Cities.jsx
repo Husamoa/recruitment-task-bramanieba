@@ -102,7 +102,7 @@ export default class Autocomplete extends Component {
       }
     };
 
-    fetch(`https://api.openaq.org/v1/cities?country=${replaceCountryString(userInput)}&sort=desc&limit=10`, {
+    fetch(`https://api.openaq.org/v1/cities?country=${replaceCountryString(userInput)}&order_by[]=count&sort=desc&limit=10`, {
       method: 'get',
       headers: {
         'Content-Type': 'application/json',
