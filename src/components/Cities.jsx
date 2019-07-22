@@ -14,6 +14,7 @@ export default class Autocomplete extends Component {
       showSuggestions: false,
       userInput: '',
       cities: [],
+      noCountry: false,
     };
   }
 
@@ -69,19 +70,9 @@ export default class Autocomplete extends Component {
   };
 
   onSubmit = (e) => {
-    const { userInput } = this.state;
     e.preventDefault();
-    switch (userInput) {
-      case 'Poland':
-      case 'Germany':
-      case 'Spain':
-      case 'France':
-        console.log('submit');
-        this.searchPollutionCities(e);
-        break;
-      default:
-        console.log('sorry, this country is unavailable');
-    }
+    this.setState({ noCountry: false });
+    this.searchPollutionCities(e);
   }
 
   searchPollutionCities = (e) => {
@@ -98,7 +89,7 @@ export default class Autocomplete extends Component {
         case 'France':
           return 'FR';
         default:
-          return null;
+          this.setState({ noCountry: true });
       }
     };
 
@@ -129,6 +120,7 @@ export default class Autocomplete extends Component {
         filteredSuggestions,
         showSuggestions,
         userInput,
+        noCountry,
       },
     } = this;
     let suggestionsListComponent;
@@ -161,6 +153,12 @@ export default class Autocomplete extends Component {
       }
     }
 
+    const renderCitiesList = noCountry
+      ? (
+        <div className="alert alert-warning col-12 text-center" role="alert">Sorry, this country is unavailable</div>
+      )
+      : <CitiesList cities={cities} />;
+
     return (
       <Fragment>
         <div className="row">
@@ -188,7 +186,7 @@ export default class Autocomplete extends Component {
         </div>
         <div className="row">
           <div className="container d-flex justify-content-center">
-            <CitiesList cities={cities} />
+            { renderCitiesList }
           </div>
         </div>
       </Fragment>
